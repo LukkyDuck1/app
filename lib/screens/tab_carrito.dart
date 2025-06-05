@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TabFavoritos extends StatelessWidget {
-  const TabFavoritos({super.key});
+class TabCarrito extends StatelessWidget {
+  const TabCarrito({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'Favoritos',
+        'Carritos',
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
       ),
     );

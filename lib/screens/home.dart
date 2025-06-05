@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
                 Tab(
                   icon: Icon(Icons.category), text: 'Categorias'),
                 Tab(
-                  icon: Icon(Icons.favorite), text: 'Favoritos'),
+                  icon: Icon(Icons.shopping_cart), text: 'Carrito'),
                 Tab(
                   icon: Icon(Icons.more_horiz), text: 'Mas'),
               ],
@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
             children: [
               Center(child: Text('Home')),
               Center(child: Text('Categorias')),
-              Center(child: Text('Favoritos')),
+              Center(child: Text('Carrito')),
               Center(child: Text('Mas')),
             ],
           ),
