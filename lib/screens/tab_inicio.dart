@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:app/screens/home.dart';
+import 'package:app/screens/bottom_nav_screen.dart';
 
 class Tabinicio extends StatelessWidget {
   const Tabinicio({super.key});
@@ -54,7 +55,7 @@ class Tabinicio extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Home()),
+                  MaterialPageRoute(builder: (context) => const BottomNavScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -72,7 +73,7 @@ class Tabinicio extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Home()),
+                  MaterialPageRoute(builder: (context) => const BottomNavScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -90,7 +91,7 @@ class Tabinicio extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Home()),
+                  MaterialPageRoute(builder: (context) => const BottomNavScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(

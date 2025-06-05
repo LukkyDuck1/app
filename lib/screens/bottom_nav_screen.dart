@@ -1,4 +1,7 @@
+import 'package:app/screens/tab_carrito.dart';
+import 'package:app/screens/tab_categorias.dart';
 import 'package:app/screens/tab_home.dart';
+import 'package:app/screens/tab_mas.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavScreen extends StatefulWidget {
@@ -12,9 +15,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
   List<Map<String, dynamic>> _tabs = [
     {'pagina': const TabHome(), 'title': 'Inicio', 'icon': Icons.home},
-    {'pagina': const TabHome(), 'title': 'Categorias', 'icon': Icons.category},
-    {'pagina': const TabHome(), 'title': 'carrito', 'icon': Icons.shopping_cart},
-    {'pagina': const TabHome(), 'title': 'Mas', 'icon': Icons.more_vert_rounded},
+    {'pagina': const TabCategorias(), 'title': 'Categorias', 'icon': Icons.category},
+    {'pagina': const TabCarrito(), 'title': 'carrito', 'icon': Icons.shopping_cart},
+    {'pagina': const TabMas(), 'title': 'Mas', 'icon': Icons.more_vert_rounded},
   ];
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       ),
       body: _tabs[_currentIndex]['pagina'],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
