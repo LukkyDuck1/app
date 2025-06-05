@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:app/screens/home.dart';
 import 'package:app/screens/bottom_nav_screen.dart';
 
 class Tabinicio extends StatelessWidget {
