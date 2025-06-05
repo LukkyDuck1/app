@@ -11,9 +11,10 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
   List<Map<String, dynamic>> _tabs = [
+    {'pagina': const TabHome(), 'title': 'Inicio', 'icon': Icons.home},
     {'pagina': const TabHome(), 'title': 'Categorias', 'icon': Icons.category},
-    {'pagina': const TabHome(), 'title': 'Favoritos', 'icon': Icons.favorite},
-    {'pagina': const TabHome(), 'title': 'Mas', 'icon': Icons.more_vert},
+    {'pagina': const TabHome(), 'title': 'carrito', 'icon': Icons.shopping_cart},
+    {'pagina': const TabHome(), 'title': 'Mas', 'icon': Icons.more_vert_rounded},
   ];
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,11 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
             BottomNavigationBarItem(
             icon: Icon(_tabs[2]['icon']),
             label: _tabs[2]['title']
-            )  
+            ),
+            BottomNavigationBarItem(
+            icon: Icon(_tabs[3]['icon']),
+            label: _tabs[3]['title']
+            )   
         ],
       ),
 
