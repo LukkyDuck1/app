@@ -13,7 +13,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   List<Map<String, dynamic>> _tabs = [
     {'pagina': const TabHome(), 'title': 'Categorias', 'icon': Icons.category},
     {'pagina': const TabHome(), 'title': 'Favoritos', 'icon': Icons.favorite},
-    {'pagina': const TabHome(), 'title': 'Mas', 'icon': Icons.more_horiz},
+    {'pagina': const TabHome(), 'title': 'Mas', 'icon': Icons.more_vert},
   ];
   @override
   Widget build(BuildContext context) {

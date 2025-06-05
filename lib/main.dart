@@ -1,4 +1,4 @@
-import 'package:app/screens/bottom_nav_screen.dart';
+import 'package:app/screens/tab_inicio.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +10,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: BottomNavScreen()
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Mi App'),
+        ),
+        body: const Tabinicio(),
+      ),
     );
   }
 }
