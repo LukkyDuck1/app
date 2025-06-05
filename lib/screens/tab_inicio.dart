@@ -27,8 +27,8 @@ class Tabinicio extends StatelessWidget {
                 shadows: [
                   Shadow(
                     offset: Offset(1.0, 1.0),
-                    blurRadius: 3.0,
-                    color: const Color.fromARGB(255, 203, 203, 203).withOpacity(0.5),
+                    blurRadius: 1.0,
+                    color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.5),
                   ),
                 ],
               ),
@@ -39,12 +39,12 @@ class Tabinicio extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16, 
                 fontWeight: FontWeight.normal,
-                color: const Color.fromARGB(255, 0, 0, 0), 
+                color: const Color.fromARGB(255, 102, 102, 102), 
                 shadows: [
                   Shadow(
                     offset: Offset(1.0, 1.0),
                     blurRadius: 1.0,
-                    color: Colors.black.withOpacity(0.5),
+                    color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
                   ),
                 ],
               ),
