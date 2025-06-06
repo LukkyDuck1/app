@@ -14,11 +14,32 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
   List<Map<String, dynamic>> _tabs = [
-    {'pagina': const TabHome(), 'title': 'Inicio', 'icon': 'assets/icons/Icon_casa.png'},
+    {
+      'pagina': const TabHome(
+        nombre: 'Lider',
+        colorPrincipal: Colors.blue,
+        categorias: ['Todos', 'Lácteos', 'Snacks', 'Bebidas'],
+        productos: {
+          'Lácteos': [
+            {'nombre': 'Leche Entera', 'precio': 1200, 'imagen': 'assets/images/lecheentera.png'},
+          ],
+          'Snacks': [
+            {'nombre': 'Papas Fritas', 'precio': 800, 'imagen': 'assets/images/papasfritas.png'},
+            {'nombre': 'Nutella', 'precio': 2500, 'imagen': 'assets/images/nutella.png'},
+          ],
+          'Bebidas': [
+            {'nombre': 'Coca Cola 591ml', 'precio': 1500, 'imagen': 'assets/images/cocacola.png'},
+          ],
+        },
+      ), 
+      'title': 'Inicio', 
+      'icon': 'assets/icons/Icon_casa.png'
+    },
     {'pagina': const TabCategorias(), 'title': 'Categorias', 'icon': 'assets/icons/icon_2.png'},
     {'pagina': const TabCarrito(), 'title': 'carrito', 'icon': 'assets/icons/Icon_carrito.png'},
     {'pagina': const TabMas(), 'title': 'Mas', 'icon': 'assets/icons/icon_mas.png'},
   ];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,41 +56,40 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           });
         },
         items: [
-  BottomNavigationBarItem(
-    icon: Image.asset(
-      _tabs[0]['icon'],
-      width: 24,
-      height: 24,
-    ),
-    label: _tabs[0]['title']
-  ),
-  BottomNavigationBarItem(
-    icon: Image.asset(
-      _tabs[1]['icon'],
-      width: 24,
-      height: 24,
-    ),
-    label: _tabs[1]['title']
-  ),
-  BottomNavigationBarItem(
-    icon: Image.asset(
-      _tabs[2]['icon'],
-      width: 24,
-      height: 24,
-    ),
-    label: _tabs[2]['title']
-  ),
-  BottomNavigationBarItem(
-    icon: Image.asset(
-      _tabs[3]['icon'],
-      width: 33,
-      height: 33,
-    ),
-    label: _tabs[3]['title']
-  )   
-],
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              _tabs[0]['icon'],
+              width: 24,
+              height: 24,
+            ),
+            label: _tabs[0]['title']
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              _tabs[1]['icon'],
+              width: 24,
+              height: 24,
+            ),
+            label: _tabs[1]['title']
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              _tabs[2]['icon'],
+              width: 24,
+              height: 24,
+            ),
+            label: _tabs[2]['title']
+          ),
+          BottomNavigationBarItem(
+            icon: Image.asset(
+              _tabs[3]['icon'],
+              width: 33,
+              height: 33,
+            ),
+            label: _tabs[3]['title']
+          )   
+        ],
       ),
-
     );
   }
 }
