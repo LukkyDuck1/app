@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:app/screens/home.dart';
+import 'lider_view.dart';
+import 'unimarc_view.dart';
+import 'santaisabel_view.dart';
 
 class Tabinicio extends StatelessWidget {
   const Tabinicio({super.key});
@@ -7,54 +9,54 @@ class Tabinicio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/imagen_comida.png'), 
-          fit: BoxFit.cover, 
+          image: AssetImage('assets/images/imagen_comida.png'),
+          fit: BoxFit.cover,
         ),
       ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Revisa el precio de tus\nproductos favoritos\n',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 27, 
+                fontSize: 27,
                 fontWeight: FontWeight.bold,
-                color: const Color.fromARGB(255, 0, 0, 0), 
+                color: Colors.black,
                 shadows: [
                   Shadow(
                     offset: Offset(1.0, 1.0),
                     blurRadius: 1.0,
-                    color: const Color.fromARGB(255, 0, 0, 0).withOpacity(0.5),
+                    color: Colors.black54,
                   ),
                 ],
               ),
             ),
-            Text(
-              'No gastes de mas. Compra donde\nrealmente este barato',
+            const Text(
+              'No gastes de más. Compra donde\nrealmente esté barato',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 16, 
-                fontWeight: FontWeight.normal,
-                color: const Color.fromARGB(255, 102, 102, 102), 
+                fontSize: 16,
+                color: Color.fromARGB(255, 102, 102, 102),
                 shadows: [
                   Shadow(
                     offset: Offset(1.0, 1.0),
                     blurRadius: 1.0,
-                    color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.5),
+                    color: Colors.white54,
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
+
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Home()),
+                  MaterialPageRoute(builder: (context) => const LiderView()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -63,45 +65,49 @@ class Tabinicio extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               ),
-              child: Text('Lider'),
+              child: const Text('Lider'),
             ),
-            SizedBox(height: 15),
+
+            const SizedBox(height: 15),
+
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Home()),
+                  MaterialPageRoute(builder: (context) => const UnimarcView()),
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               ),
-              child: Text('Unimarc'),
+              child: const Text('Unimarc'),
             ),
-            SizedBox(height: 15),
+
+            const SizedBox(height: 15),
+
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const Home()),
+                  MaterialPageRoute(builder: (context) => const SantaIsabelView()),
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
               ),
-              child: Text('Santa Isabel'),
+              child: const Text('Santa Isabel'),
             ),
           ],
         ),

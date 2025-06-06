@@ -1,5 +1,7 @@
-import 'package:app/screens/tab_home.dart';
 import 'package:flutter/material.dart';
+import 'santaisabel_view.dart';
+import 'unimarc_view.dart';
+import 'lider_view.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
@@ -10,17 +12,31 @@ class BottomNavScreen extends StatefulWidget {
 
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
-  List<Map<String, dynamic>> _tabs = [
-    {'pagina': const TabHome(), 'title': 'Inicio', 'icon': Icons.home},
-    {'pagina': const TabHome(), 'title': 'Categorias', 'icon': Icons.category},
-    {'pagina': const TabHome(), 'title': 'carrito', 'icon': Icons.shopping_cart},
-    {'pagina': const TabHome(), 'title': 'Mas', 'icon': Icons.more_vert_rounded},
+
+  final List<Map<String, dynamic>> _tabs = [
+    {
+      'pagina': const LiderView(),
+      'title': 'Lider',
+      'icon': Icons.store_mall_directory,
+    },
+    {
+      'pagina': const UnimarcView(),
+      'title': 'Unimarc',
+      'icon': Icons.storefront,
+    },
+    {
+      'pagina': const SantaIsabelView(),
+      'title': 'Santa Isabel',
+      'icon': Icons.shopping_bag,
+    },
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(_tabs[_currentIndex]['title']),
+        backgroundColor: Colors.blue,
       ),
       body: _tabs[_currentIndex]['pagina'],
       bottomNavigationBar: BottomNavigationBar(
@@ -30,28 +46,13 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
             _currentIndex = index;
           });
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(_tabs[0]['icon']),
-            label: _tabs[0]['title']
-            )
-          ,
-          BottomNavigationBarItem(
-            icon: Icon(_tabs[1]['icon']),
-            label: _tabs[1]['title']
-            ),
-
-            BottomNavigationBarItem(
-            icon: Icon(_tabs[2]['icon']),
-            label: _tabs[2]['title']
-            ),
-            BottomNavigationBarItem(
-            icon: Icon(_tabs[3]['icon']),
-            label: _tabs[3]['title']
-            )   
-        ],
+        items: _tabs.map((tab) {
+          return BottomNavigationBarItem(
+            icon: Icon(tab['icon']),
+            label: tab['title'],
+          );
+        }).toList(),
       ),
-
     );
   }
 }
