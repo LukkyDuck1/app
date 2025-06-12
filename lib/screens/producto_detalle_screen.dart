@@ -1,13 +1,11 @@
-
-
 import 'package:flutter/material.dart';
-//import
+import '/models/modelo_producto.dart';
 //Declarar algo que se defina entre todas las screens como una variable definitiva? 
 
 class ProductoDetallado extends StatelessWidget {
 
-  //final Producto producto;
-  const ProductoDetallado({super.key});
+  final ModeloProducto producto;
+  const ProductoDetallado({super.key, required this.producto});
   //Faltaria declarar algo? Hacerlo dinamico?
   @override
   Widget build(BuildContext context) {

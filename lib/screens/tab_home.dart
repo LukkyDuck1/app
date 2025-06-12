@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:app/models/modelo_producto.dart';
+import 'package:app/screens/producto_detalle_screen.dart';
 
 class TabHome extends StatefulWidget {
   final String nombre;
   final Color colorPrincipal;
-  final Map<String, List<Map<String, dynamic>>> productos;
+  final Map<String, List<ModeloProducto>> productos;
   final List<String> categorias;
 
   const TabHome({
@@ -23,8 +25,8 @@ class _TabHomeState extends State<TabHome> {
   String textoBusqueda = '';
   final TextEditingController _busquedaController = TextEditingController();
 
-  List<Map<String, dynamic>> obtenerProductosFiltrados() {
-    List<Map<String, dynamic>> productos;
+  List<ModeloProducto> obtenerProductosFiltrados() {
+    List<ModeloProducto> productos;
 
     if (filtroSeleccionado == 'Todos') {
       productos = widget.productos.values.expand((list) => list).toList();
@@ -34,7 +36,7 @@ class _TabHomeState extends State<TabHome> {
 
     if (textoBusqueda.isNotEmpty) {
       productos = productos.where((producto) {
-        final nombre = producto['nombre'].toString().toLowerCase();
+        final nombre = producto.nombre.toLowerCase();
         return nombre.startsWith(textoBusqueda.toLowerCase());
       }).toList();
     }
@@ -44,7 +46,7 @@ class _TabHomeState extends State<TabHome> {
 
   @override
   Widget build(BuildContext context) {
-    final productos = obtenerProductosFiltrados();  //Busqueda de productos recorriendo caracter
+    final productos = obtenerProductosFiltrados();
 
     return Scaffold(
       appBar: AppBar(
@@ -130,39 +132,50 @@ class _TabHomeState extends State<TabHome> {
                       mainAxisSpacing: 10,
                       childAspectRatio: 0.65,
                       children: productos.map((producto) {
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          elevation: 2,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
-                                    producto['imagen'].toString(),
-                                    fit: BoxFit.contain,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ProductoDetallado(producto: producto),
+                              ),
+                            );
+                          },
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            elevation: 2,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Image.asset(
+                                      producto.imagen,
+                                      fit: BoxFit.contain,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                  producto['nombre'].toString(),
-                                  style: const TextStyle(fontWeight: FontWeight.bold),
-                                  textAlign: TextAlign.center,
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Text(
+                                    producto.nombre,
+                                    style: const TextStyle(fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: Text(
-                                  '\$${producto['precio']}',
-                                  style: TextStyle(color: Colors.grey[700]),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: Text(
+                                    '\$${producto.precio.toStringAsFixed(0)}',
+                                    style: TextStyle(color: Colors.grey[700]),
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       }).toList(),
