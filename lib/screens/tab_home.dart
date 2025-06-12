@@ -44,7 +44,7 @@ class _TabHomeState extends State<TabHome> {
 
   @override
   Widget build(BuildContext context) {
-    final productos = obtenerProductosFiltrados();
+    final productos = obtenerProductosFiltrados();  //Busqueda de productos recorriendo caracter
 
     return Scaffold(
       appBar: AppBar(
