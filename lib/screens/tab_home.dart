@@ -44,7 +44,7 @@ class _TabHomeState extends State<TabHome> {
 
   @override
   Widget build(BuildContext context) {
-    final productos = obtenerProductosFiltrados();
+    final productosFiltrados = obtenerProductosFiltrados();
 
     return Scaffold(
       appBar: AppBar(
@@ -122,14 +122,14 @@ class _TabHomeState extends State<TabHome> {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: productos.isEmpty
+              child: productosFiltrados.isEmpty
                   ? const Center(child: Text('No se encontraron productos.'))
                   : GridView.count(
                       crossAxisCount: 2,
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       childAspectRatio: 0.65,
-                      children: productos.map((producto) {
+                      children: productosFiltrados.map((producto) {
                         return Card(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12),
@@ -141,9 +141,12 @@ class _TabHomeState extends State<TabHome> {
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: Image.asset(
+                                  child: Image.network(
                                     producto['imagen'].toString(),
                                     fit: BoxFit.contain,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Icon(Icons.broken_image, size: 50);
+                                    },
                                   ),
                                 ),
                               ),
