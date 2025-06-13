@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 class TabCategorias extends StatelessWidget {
   final String? supermercadoActual;
+  final Function(String) onCategoriaSeleccionada;
 
-  const TabCategorias({required this.supermercadoActual, super.key});
+  const TabCategorias({
+    required this.supermercadoActual,
+    required this.onCategoriaSeleccionada,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -68,8 +73,9 @@ class TabCategorias extends StatelessWidget {
                     ),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
-                      // Aquí puedes agregar la lógica para navegar a los productos de la categoría seleccionada
-                      print('Seleccionaste la categoría: $categoria');
+                      if (categoria != 'No hay supermercado seleccionado') {
+                        onCategoriaSeleccionada(categoria); // Llamar al callback
+                      }
                     },
                   ),
                 );

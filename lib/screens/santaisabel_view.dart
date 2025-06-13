@@ -4,7 +4,9 @@ import 'package:http/http.dart' as http;
 import 'tab_home.dart';
 
 class SantaIsabelView extends StatefulWidget {
-  const SantaIsabelView({super.key});
+  final String? filtroInicial;
+
+  const SantaIsabelView({this.filtroInicial, super.key});
 
   @override
   State<SantaIsabelView> createState() => _SantaIsabelViewState();
@@ -109,6 +111,7 @@ String obtenerCategoria(String nombreProducto) {
             colorPrincipal: const Color.fromARGB(255, 225, 17, 17),
             productos: productos,
             categorias: categorias,
+            filtroInicial: widget.filtroInicial,
           );
         }
       },

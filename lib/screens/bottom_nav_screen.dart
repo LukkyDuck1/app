@@ -1,7 +1,5 @@
-import 'package:app/screens/tab_carrito.dart';
 import 'package:app/screens/tab_categorias.dart';
 import 'package:app/screens/tab_inicio.dart';
-import 'package:app/screens/tab_mas.dart';
 import 'package:app/screens/lider_view.dart';
 import 'package:app/screens/santaisabel_view.dart';
 import 'package:app/screens/unimarc_view.dart';
@@ -17,6 +15,7 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
   String? _supermercadoActual;
+  String? _filtroCategoria; // Nueva variable para el filtro
 
   @override
   void initState() {
@@ -25,32 +24,39 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
 
   void _abrirSupermercado(String supermercado) {
     setState(() {
-      _supermercadoActual = supermercado; // Cambiar automáticamente a la pestaña de Categorías
+      _supermercadoActual = supermercado;
+      _filtroCategoria = null; // Resetear filtro al cambiar supermercado
     });
   }
 
   void _cerrarSupermercado() {
     setState(() {
       _supermercadoActual = null;
-      _currentIndex = 0; // Regresar a la pestaña de inicio
+      _filtroCategoria = null; // Resetear filtro
+      _currentIndex = 0;
+    });
+  }
+
+  // Nueva función para aplicar filtro de categoría
+  void _aplicarFiltroCategoria(String categoria) {
+    setState(() {
+      _filtroCategoria = categoria;
+      _currentIndex = 0; // Cambiar a la pestaña de inicio
     });
   }
 
   Widget _getSupermercadoView(List<Map<String, dynamic>> tabs) {
-    // Solo mostrar vistas de supermercado si estás en la pestaña de Inicio (index 0)
-    // y hay un supermercado seleccionado
     if (_currentIndex == 0 && _supermercadoActual != null) {
       switch (_supermercadoActual) {
         case 'Lider':
-          return const LiderView();
+          return LiderView(filtroInicial: _filtroCategoria);
         case 'Santa Isabel':
-          return const SantaIsabelView();
+          return SantaIsabelView(filtroInicial: _filtroCategoria);
         case 'Unimarc':
-          return const UnimarcView();
+          return UnimarcView(filtroInicial: _filtroCategoria);
       }
     }
     
-    // En cualquier otro caso, mostrar la pestaña normal
     return tabs[_currentIndex]['pagina'];
   }
 
@@ -63,11 +69,13 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         'icon': 'assets/icons/Icon_casa.png',
       },
       {
-        'pagina': TabCategorias(supermercadoActual: _supermercadoActual),
+        'pagina': TabCategorias(
+          supermercadoActual: _supermercadoActual,
+          onCategoriaSeleccionada: _aplicarFiltroCategoria,
+        ),
         'title': 'Categorias',
         'icon': 'assets/icons/icon_2.png',
       },
-      // Eliminadas las pestañas de Carrito y Mas
     ];
 
     return Scaffold(
@@ -87,8 +95,6 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
         onTap: (index) {
           setState(() {
             _currentIndex = index;
-            // Ya no necesitas verificar índices 2 y 3 (Carrito y Mas)
-            // Solo mantener el supermercado para Inicio (0) y Categorías (1)
           });
         },
         items: tabs.map((tab) {

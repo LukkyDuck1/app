@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'tab_home.dart';
 
 class LiderView extends StatelessWidget {
-  const LiderView({super.key});
+  final String? filtroInicial;
+
+  const LiderView({this.filtroInicial, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,7 @@ class LiderView extends StatelessWidget {
           {'nombre': 'Coca Cola 591ml', 'precio': 1500, 'imagen': 'assets/images/cocacola.png'},
         ],
       },
+      filtroInicial: filtroInicial,
     );
   }
 }

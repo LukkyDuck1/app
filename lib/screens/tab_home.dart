@@ -5,12 +5,14 @@ class TabHome extends StatefulWidget {
   final Color colorPrincipal;
   final Map<String, List<Map<String, dynamic>>> productos;
   final List<String> categorias;
+  final String? filtroInicial; // Nuevo parámetro
 
   const TabHome({
     required this.nombre,
     required this.colorPrincipal,
     required this.productos,
     required this.categorias,
+    this.filtroInicial, // Parámetro opcional
     super.key,
   });
 
@@ -22,6 +24,15 @@ class _TabHomeState extends State<TabHome> {
   String filtroSeleccionado = 'Todos';
   String textoBusqueda = '';
   final TextEditingController _busquedaController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    // Aplicar filtro inicial si se proporciona
+    if (widget.filtroInicial != null && widget.categorias.contains(widget.filtroInicial)) {
+      filtroSeleccionado = widget.filtroInicial!;
+    }
+  }
 
   List<Map<String, dynamic>> obtenerProductosFiltrados() {
     List<Map<String, dynamic>> productos;
