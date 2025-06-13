@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:app/screens/bottom_nav_screen.dart';
-import 'lider_view.dart';
-import 'unimarc_view.dart';
-import 'santaisabel_view.dart';
 
 class Tabinicio extends StatelessWidget {
-  const Tabinicio({super.key});
+  final Function(String) abrirSupermercado;
+
+  const Tabinicio({required this.abrirSupermercado, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,39 +25,11 @@ class Tabinicio extends StatelessWidget {
                 fontSize: 27,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
-                shadows: [
-                  Shadow(
-                    offset: Offset(1.0, 1.0),
-                    blurRadius: 1.0,
-                    color: Colors.black54,
-                  ),
-                ],
-              ),
-            ),
-            const Text(
-              'No gastes de más. Compra donde\nrealmente esté barato',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Color.fromARGB(255, 102, 102, 102),
-                shadows: [
-                  Shadow(
-                    offset: Offset(1.0, 1.0),
-                    blurRadius: 1.0,
-                    color: Colors.white54,
-                  ),
-                ],
               ),
             ),
             const SizedBox(height: 30),
-
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const BottomNavScreen()),
-                );
-              },
+              onPressed: () => abrirSupermercado('Lider'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
@@ -70,16 +40,9 @@ class Tabinicio extends StatelessWidget {
               ),
               child: const Text('Lider'),
             ),
-
             const SizedBox(height: 15),
-
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const UnimarcView()),
-                );
-              },
+              onPressed: () => abrirSupermercado('Unimarc'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
@@ -90,18 +53,11 @@ class Tabinicio extends StatelessWidget {
               ),
               child: const Text('Unimarc'),
             ),
-
             const SizedBox(height: 15),
-
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SantaIsabelView()),
-                );
-              },
+              onPressed: () => abrirSupermercado('Santa Isabel'),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
+                backgroundColor: const Color.fromARGB(255, 158, 33, 33),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),

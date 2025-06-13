@@ -1,14 +1,82 @@
 import 'package:flutter/material.dart';
 
 class TabCategorias extends StatelessWidget {
-  const TabCategorias({super.key});
+  final String? supermercadoActual;
+
+  const TabCategorias({required this.supermercadoActual, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Categorias',
-        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+    // Define las categorías según el supermercado
+    final Map<String, List<String>> categoriasPorSupermercado = {
+      'Lider': ['Lácteos', 'Snacks', 'Bebidas', 'Abarrotes'],
+      'Santa Isabel': ['Lácteos', 'Panadería', 'Bebestibles', 'Carnes', 'Abarrotes', 'Dulces'],
+      'Unimarc': ['Lácteos', 'Snacks', 'Bebidas', 'Carnes', 'Abarrotes'],
+    };
+
+    // Define los iconos para cada categoría
+    final Map<String, IconData> iconosPorCategoria = {
+      'Lácteos': Icons.local_drink,
+      'Snacks': Icons.fastfood,
+      'Bebidas': Icons.local_bar,
+      'Abarrotes': Icons.shopping_basket,
+      'Panadería': Icons.bakery_dining,
+      'Bebestibles': Icons.wine_bar,
+      'Carnes': Icons.restaurant,
+      'Dulces': Icons.cake,
+    };
+
+    // Obtén las categorías del supermercado actual
+    final categorias = categoriasPorSupermercado[supermercadoActual] ?? ['No hay supermercado seleccionado'];
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Categorías - ${supermercadoActual ?? "General"}',
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              itemCount: categorias.length,
+              itemBuilder: (context, index) {
+                final categoria = categorias[index];
+                final icono = iconosPorCategoria[categoria] ?? Icons.category;
+                
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: ListTile(
+                    title: Text(
+                      categoria,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.blue.withOpacity(0.1),
+                      child: Icon(
+                        icono,
+                        color: Colors.blue,
+                      ),
+                    ),
+                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    onTap: () {
+                      // Aquí puedes agregar la lógica para navegar a los productos de la categoría seleccionada
+                      print('Seleccionaste la categoría: $categoria');
+                    },
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
