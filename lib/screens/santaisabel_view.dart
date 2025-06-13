@@ -19,6 +19,29 @@ class _SantaIsabelViewState extends State<SantaIsabelView> {
     _productos = fetchProductos();
   }
 
+  // Mapa de palabras clave por categoría
+  final Map<String, List<String>> palabrasPorCategoria = {
+    'Lácteos': ['leche', 'queso', 'yogur', 'mantequilla', 'nido','cuisine'],
+    'Panadería': ['pan', 'hallulla', 'marraqueta', 'croissant'],
+    'Dulces': ['Santa Isabel', 'Sahne Nuss', 'Costa', 'Ferrero Rocher', 'Savory' ],
+    'Bebestibles': ['coca', 'fanta', 'sprite', 'Diablo', 'Toro', 'Gato', 'Casillero', 'Misiones', 'cristal','jugo', 'bebida', 'cerveza', 'pepsi', 'agua', 'Stella Artois','Heineken'],
+    'Carnes': ['pollo', 'carne', 'vacuno', 'cerdo', 'longaniza', 'pavo','San Jorge', 'Cuisine', 'vacuno', 'cerdo', 'longaniza', 'pavo'],
+    'Abarrotes': ['arroz', 'fideo', 'azúcar', 'harina', 'lentejas', 'garbanzos'],
+  };
+
+  // Función que determina la categoría de un producto según su nombre
+String obtenerCategoria(String nombreProducto) {
+  final nombre = nombreProducto.toLowerCase();
+  for (var categoria in palabrasPorCategoria.keys) {
+    for (var palabra in palabrasPorCategoria[categoria]!) {
+      if (nombre.contains(palabra.toLowerCase())) {
+        return categoria;
+      }
+    }
+  }
+  return 'Otros';
+}
+
   Future<Map<String, List<Map<String, dynamic>>>> fetchProductos() async {
     try {
       final response = await http.get(
@@ -28,17 +51,31 @@ class _SantaIsabelViewState extends State<SantaIsabelView> {
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as List<dynamic>;
 
-        // Reorganizar los datos en categorías
         final Map<String, List<Map<String, dynamic>>> productos = {
           'Todos': [],
+          'Lácteos': [],
+          'Panadería': [],
+          'Bebestibles': [],
+          'Carnes': [],
+          'Abarrotes': [],
+          'Dulces':[],
+          'Otros': [],
         };
 
         for (var item in data) {
-          productos['Todos']!.add({
-            'nombre': item['nombre'],
+          final nombre = item['nombre'];
+          final producto = {
+            'nombre': nombre,
             'precio': item['precio_actual'],
-            'imagen': item['imagen'], // URL de la imagen
-          });
+            'imagen': item['imagen'],
+          };
+
+          // Agregar a "Todos"
+          productos['Todos']!.add(producto);
+
+          // Agregar a su categoría correspondiente
+          final categoria = obtenerCategoria(nombre);
+          productos[categoria]!.add(producto);
         }
 
         return productos;
@@ -65,7 +102,7 @@ class _SantaIsabelViewState extends State<SantaIsabelView> {
           );
         } else {
           final productos = snapshot.data!;
-          final categorias = ['Todos'];
+          final categorias = productos.keys.toList(); // Esto obtiene todas las categorías dinámicamente
 
           return TabHome(
             nombre: 'Santa Isabel',
